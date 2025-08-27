@@ -1,9 +1,6 @@
-package store.account_service;
+package store.account;
 
 import java.util.List;
-
-import store.account.AccountIn;
-import store.account.AccountOut;
 
 public class AccountParser {
 

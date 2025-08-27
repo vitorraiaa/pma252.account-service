@@ -1,13 +1,9 @@
-package store.account_service;
+package store.account;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
-
-import store.account.AccountController;
-import store.account.AccountIn;
-import store.account.AccountOut;
 
 @RestController
 public class AccountResource implements AccountController {
