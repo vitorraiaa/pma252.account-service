@@ -1,4 +1,4 @@
-package store.account_service;
+package store.account;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

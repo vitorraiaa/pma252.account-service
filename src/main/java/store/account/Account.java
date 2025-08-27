@@ -1,4 +1,4 @@
-package store.account_service;
+package store.account;
 
 import lombok.Builder;
 import lombok.Data;
