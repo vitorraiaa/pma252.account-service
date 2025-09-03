@@ -5,6 +5,10 @@ spring:
   application:
     name: account
 
+  mvc:
+    problemdetails:
+      enabled: true
+
   datasource:
     url: ${DATABASE_URL}
     username: ${DATABASE_USERNAME}

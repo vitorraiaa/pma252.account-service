@@ -9,7 +9,6 @@ import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -32,7 +31,17 @@ public class AccountService {
                 "Password is too short!"
             );
         }
-        
+        if (null == account.email()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                "Email is mandatory!"
+            );
+        }
+
+        if (accountRepository.findByEmail(account.email()) != null)
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                "Email already have been registered!"
+            );
+
         account.sha256(hash(account.password()));
 
         return accountRepository.save(
