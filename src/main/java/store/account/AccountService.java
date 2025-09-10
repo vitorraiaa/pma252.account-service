@@ -56,6 +56,19 @@ public class AccountService {
             .toList();
     }
 
+    public Account findById(String id) {
+        return accountRepository.findById(id).map(AccountModel::to).orElse(null);
+    }
+
+    public Account findByEmailAndPassword(String email, String password) {
+        String sha256 = hash(password);
+        return accountRepository.findByEmailAndSha256(email, sha256).map(AccountModel::to).orElse(null);
+    }
+
+    public void delete(String id) {
+        accountRepository.delete(new AccountModel().id(id));
+    }
+
     public String hash(String pass) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");

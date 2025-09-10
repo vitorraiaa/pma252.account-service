@@ -22,18 +22,28 @@ public class AccountResource implements AccountController {
 
         // parser Account to AccountOut and build to
         // HATEAOS standard
-        return ResponseEntity.created(
-            ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(saved.id())
-                .toUri()
-        ).body(AccountParser.to(saved));
+        return ResponseEntity
+            .created(
+                ServletUriComponentsBuilder.fromCurrentRequest()
+                    .path("/{id}")
+                    .buildAndExpand(saved.id())
+                    .toUri()
+            ).body(AccountParser.to(saved));
     }
 
     @Override
     public ResponseEntity<AccountOut> findById(String id) {
-        // TODO Auto-generated method stub
-        return null;
+        return ResponseEntity
+            .ok(AccountParser.to(accountService.findById(id)));
+    }
+
+    @Override
+    public ResponseEntity<AccountOut> findByEmailAndPassword(AccountIn in) {
+        return ResponseEntity
+            .ok()
+            .body(AccountParser.to(
+                accountService.findByEmailAndPassword(in.email(), in.password())
+            ));
     }
 
     @Override
@@ -45,8 +55,9 @@ public class AccountResource implements AccountController {
 
     @Override
     public ResponseEntity<Void> delete(String id) {
-        // TODO Auto-generated method stub
-        return null;
+        return ResponseEntity
+            .noContent()
+            .build();
     }
     
 }
