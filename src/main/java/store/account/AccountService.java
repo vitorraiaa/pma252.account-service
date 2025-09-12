@@ -7,6 +7,8 @@ import java.util.Base64;
 import java.util.List;
 import java.util.stream.StreamSupport;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class AccountService {
+
+    private Logger looger = LoggerFactory.getLogger(AccountService.class);
 
     @Autowired
     private AccountRepository accountRepository;
@@ -69,7 +73,7 @@ public class AccountService {
         accountRepository.delete(new AccountModel().id(id));
     }
 
-    public String hash(String pass) {
+    private String hash(String pass) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] encodedHash = digest.digest(
